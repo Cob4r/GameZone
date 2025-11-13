@@ -42,6 +42,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation("androidx.navigation:navigation-compose:2.8.4")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
