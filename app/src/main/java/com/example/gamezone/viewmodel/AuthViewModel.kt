@@ -75,4 +75,29 @@ class AuthViewModel(private val repository: UserRepository) : ViewModel() {
             _uiState.update { it.copy(success = true, errors = emptyMap()) }
         }
     }
+    fun login() {
+        val s = _uiState.value
+        val errors = mutableMapOf<String, String>()
+
+        if (!s.email.contains("@duoc.cl")) {
+            errors["login"] = "El correo debe ser institucional (@duoc.cl)"
+        } else if (s.password.isBlank()) {
+            errors["login"] = "Debe ingresar una contraseña"
+        } else if (s.password.length < 6) {
+            errors["login"] = "Contraseña demasiado corta"
+        }
+
+        if (errors.isNotEmpty()) {
+            _uiState.update { it.copy(errors = errors, success = false) }
+            return
+        }
+
+        // 🔹 Simulación de login correcto
+        if (s.email == "user@duoc.cl" && s.password == "123456") {
+            _uiState.update { it.copy(success = true, errors = emptyMap()) }
+        } else {
+            _uiState.update { it.copy(errors = mapOf("login" to "Credenciales inválidas")) }
+        }
+    }
+
 }
